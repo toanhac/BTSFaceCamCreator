@@ -3,7 +3,7 @@ import glob
 import shutil
 
 root_dir = "./images"
-output_dir = "./data"
+output_dir = "./dataset"
 
 
 os.makedirs(os.path.join(output_dir, "images"), exist_ok=True)
@@ -20,33 +20,33 @@ classes = [file.split('/')[2] for file in files]
 class_to_id = {cls: i for i, cls in enumerate(classes)}
 
 
-# for cls in classes:
-#     class_dir = os.path.join(root_dir, cls)
-#     if not os.path.exists(class_dir):
-#         continue
-#     #print (class_dir)
-#     images = glob.glob(f"{class_dir}/*")
+for cls in classes:
+    class_dir = os.path.join(root_dir, cls)
+    if not os.path.exists(class_dir):
+        continue
+    #print (class_dir)
+    images = glob.glob(f"{class_dir}/*")
 
-#     #print(images)
-#     for i, img_file in enumerate(images):
-#         if img_file.endswith((".jpg", ".png", ".jpeg")):
-#             img_path = img_file
-#             print(img_path)
-#             if i % 5 == 0:
-#                 output_img_path = os.path.join(output_dir, "images", "val", img_path.split('/')[-1])
-#                 shutil.copyfile(img_path, output_img_path)
-#             else:
-#                 output_img_path = os.path.join(output_dir, "images", "train", img_path.split('/')[-1])
-#                 shutil.copyfile(img_path, output_img_path)
-#             #print(img_file)
-#             label_file = os.path.splitext(img_file.split('/')[-1])[0] + ".txt"
-#             #print(label_file)
-#             if i % 5 == 0:
-#                 label_path = os.path.join(output_dir, "labels", "val", label_file)
-#             else:
-#                 label_path = os.path.join(output_dir, "labels", "train", label_file)
-#             with open(label_path, "w") as f:
-#                 f.write(f"{class_to_id[cls]} 0.5 0.5 1.0 1.0\n")
+    #print(images)
+    for i, img_file in enumerate(images):
+        if img_file.endswith((".jpg", ".png", ".jpeg")):
+            img_path = img_file
+            print(img_path)
+            if i % 5 == 0:
+                output_img_path = os.path.join(output_dir, "images", "val", img_path.split('/')[-1])
+                shutil.copyfile(img_path, output_img_path)
+            else:
+                output_img_path = os.path.join(output_dir, "images", "train", img_path.split('/')[-1])
+                shutil.copyfile(img_path, output_img_path)
+            #print(img_file)
+            label_file = os.path.splitext(img_file.split('/')[-1])[0] + ".txt"
+            #print(label_file)
+            if i % 5 == 0:
+                label_path = os.path.join(output_dir, "labels", "val", label_file)
+            else:
+                label_path = os.path.join(output_dir, "labels", "train", label_file)
+            with open(label_path, "w") as f:
+                f.write(f"{class_to_id[cls]} 0.5 0.5 1.0 1.0\n")
         
 
 yaml_file = os.path.join(output_dir, "data.yaml")
