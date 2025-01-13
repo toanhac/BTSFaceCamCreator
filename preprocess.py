@@ -31,7 +31,7 @@ for cls in classes:
     for i, img_file in enumerate(images):
         if img_file.endswith((".jpg", ".png", ".jpeg")):
             img_path = img_file
-            print(img_path)
+            #print(img_path)
             if i % 5 == 0:
                 output_img_path = os.path.join(output_dir, "images", "val", img_path.split('/')[-1])
                 shutil.copyfile(img_path, output_img_path)
